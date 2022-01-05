@@ -92,6 +92,7 @@ const AddItemDialog = (addItemCallback, renderItemsCallback) => {
       priority.value
     );
     renderItemsCallback();
+    form.reset();
   };
   form.appendChild(submitButton);
 
