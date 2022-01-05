@@ -6,6 +6,7 @@ const TodoList = (title) => {
   const addItem = (todoItem) => {
     items.push(todoItem);
   };
+
   return {
     title,
     items,
