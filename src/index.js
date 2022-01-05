@@ -6,8 +6,8 @@ import { SetTextForElement } from "./views/utils";
 
 let app = TodoApp();
 app.createProject("House");
-const item1 = TodoItem("Title1", "Desc1", new Date(2021, 1, 4), 100);
-const item2 = TodoItem("Title2", "Desc2", new Date(2021, 2, 1), 80);
+const item1 = TodoItem("Title1", "Desc1", new Date(2021, 1, 4), 5);
+const item2 = TodoItem("Title2", "Desc2", new Date(2021, 2, 1), 3);
 app.currentProject().addItem(item1);
 app.currentProject().addItem(item2);
 

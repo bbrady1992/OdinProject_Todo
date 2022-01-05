@@ -1,5 +1,8 @@
+import { AddItemDialog } from "./addItemDialog";
 import { TodoItemView } from "./todoItemView";
 import { SetTextForElement } from "./utils";
+import { TodoItem } from "../models/todo-item";
+import { parseISO } from "date-fns";
 
 const ProjectView = (app) => {
   const _app = app;
@@ -47,6 +50,14 @@ const ProjectView = (app) => {
 
   const projectView = document.querySelector("#projectView");
   projectView.appendChild(container);
+
+  projectView.appendChild(
+    AddItemDialog((title, description, dueDate, priority) => {
+      console.log(`Date is ${dueDate}`);
+      const newItem = TodoItem(title, description, parseISO(dueDate), priority);
+      app.currentProject().addItem(newItem);
+    }, _renderTodoItems)
+  );
 };
 
 export { ProjectView };

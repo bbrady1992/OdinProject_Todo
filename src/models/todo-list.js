@@ -12,6 +12,8 @@ const TodoList = (title) => {
   let items = [];
   let _nextItemIndex = 1;
   const addItem = (todoItem) => {
+    console.log("Adding item");
+    console.log({ todoItem });
     todoItem.id = _nextItemIndex;
     ++_nextItemIndex;
     items.push(todoItem);
