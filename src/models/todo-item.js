@@ -1,9 +1,9 @@
 const TodoItem = (title, description, dueDate, priority) => {
   let completed = false;
-  const setCompleted = (isComplete) => {
-    completed = isComplete;
-  };
+  let id = null;
+
   return {
+    id,
     title,
     description,
     dueDate,

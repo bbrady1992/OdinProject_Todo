@@ -3,7 +3,8 @@ import { SetTextForElement } from "./utils";
 import { format } from "date-fns";
 import "../style/todoItemView.css";
 
-const TodoItemView = (todoItem) => {
+const TodoItemView = (todoItem, deleteItemCallback) => {
+  console.log("Creating view for todoItem" + todoItem.id);
   const container = document.createElement("div");
   container.classList.add("todoItemContainer");
 
@@ -31,6 +32,9 @@ const TodoItemView = (todoItem) => {
   const deleteButton = document.createElement("button");
   SetTextForElement(deleteButton, "X");
   container.appendChild(deleteButton);
+  deleteButton.addEventListener("click", () => {
+    deleteItemCallback(todoItem.id);
+  });
 
   return container;
 };
