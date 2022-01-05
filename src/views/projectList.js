@@ -21,9 +21,12 @@ const ProjectList = (app) => {
     while (list.firstChild) {
       list.removeChild(list.firstChild);
     }
-    _app.projectNames().forEach((element) => {
+    _app.getProjects().forEach((value, key) => {
       const listItem = document.createElement("li");
-      SetTextForElement(listItem, element);
+      SetTextForElement(listItem, value.title);
+      listItem.addEventListener("click", () => {
+        app.setCurrentProject(key);
+      });
       list.appendChild(listItem);
     });
   };

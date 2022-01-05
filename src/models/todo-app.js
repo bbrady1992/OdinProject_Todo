@@ -12,6 +12,8 @@ const TodoApp = () => {
     projects.set(newProject.id, newProject);
   };
 
+  const getProjects = () => projects;
+
   const projectNames = () => {
     const projectNames = [];
     projects.forEach((p) => projectNames.push(p.title));
@@ -23,6 +25,7 @@ const TodoApp = () => {
   };
 
   const setCurrentProject = (projectID) => {
+    console.log(`Setting current project ID to ${projectID}`);
     currentProjectID = projectID;
   };
 
@@ -37,6 +40,7 @@ const TodoApp = () => {
     projectNames,
     setCurrentProject,
     getProjectByID,
+    getProjects,
   };
 };
 
