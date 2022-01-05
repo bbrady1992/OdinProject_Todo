@@ -26,12 +26,18 @@ const ProjectView = (app) => {
     }
     _app.currentProject().items.forEach((item) => {
       const listItem = document.createElement("li");
-      // TODO (bbrady) - need to update this callback to call correct project
-      // after adding a project ID
-      const todoItemView = TodoItemView(item, () => {
-        _app.getProjectByID(_app.currentProject().id).deleteItem(item.id);
-        _renderTodoItems();
-      });
+      const todoItemView = TodoItemView(
+        item,
+        (isComplete) => {
+          item.completed = isComplete;
+          console.log(`Item ${item.id} checkbox clicked`);
+          console.log({ item });
+        },
+        () => {
+          _app.getProjectByID(_app.currentProject().id).deleteItem(item.id);
+          _renderTodoItems();
+        }
+      );
       listItem.appendChild(todoItemView);
       itemList.appendChild(listItem);
     });

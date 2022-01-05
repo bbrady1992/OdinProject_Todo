@@ -2,6 +2,7 @@ import { ProjectView } from "./views/projectView";
 import { ProjectList } from "./views/projectList";
 import TodoApp from "./models/todo-app";
 import { TodoItem } from "./models/todo-item";
+import { SetTextForElement } from "./views/utils";
 
 let app = TodoApp();
 app.createProject("House");
@@ -10,5 +11,5 @@ const item2 = TodoItem("Title2", "Desc2", new Date(2021, 2, 1), 80);
 app.currentProject().addItem(item1);
 app.currentProject().addItem(item2);
 
-ProjectView(app);
 ProjectList(app);
+ProjectView(app);

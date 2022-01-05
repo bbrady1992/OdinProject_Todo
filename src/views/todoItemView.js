@@ -3,15 +3,18 @@ import { SetTextForElement } from "./utils";
 import { format } from "date-fns";
 import "../style/todoItemView.css";
 
-const TodoItemView = (todoItem, deleteItemCallback) => {
+const TodoItemView = (todoItem, completeItemCallback, deleteItemCallback) => {
   console.log("Creating view for todoItem" + todoItem.id);
   const container = document.createElement("div");
   container.classList.add("todoItemContainer");
 
   const completed = document.createElement("input");
   completed.type = "checkbox";
-  container.appendChild(completed);
   completed.checked = todoItem.completed;
+  completed.addEventListener("click", (e) => {
+    completeItemCallback(e.target.checked);
+  });
+  container.appendChild(completed);
 
   const title = document.createElement("p");
   SetTextForElement(title, todoItem.title);
