@@ -1,6 +1,14 @@
 import { TodoItem } from "./todo-item";
 
+const ProjectID = (function () {
+  let id = 0;
+  return function () {
+    return id++;
+  };
+})();
+
 const TodoList = (title) => {
+  let id = ProjectID();
   let items = [];
   let _nextItemIndex = 1;
   const addItem = (todoItem) => {
@@ -21,7 +29,9 @@ const TodoList = (title) => {
     console.log({ items });
   };
 
+  console.log(`Created project ${title} with ID ${id}`);
   return {
+    id,
     title,
     items,
     addItem,

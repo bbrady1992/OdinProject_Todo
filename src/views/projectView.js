@@ -29,7 +29,8 @@ const ProjectView = (app) => {
       // TODO (bbrady) - need to update this callback to call correct project
       // after adding a project ID
       const todoItemView = TodoItemView(item, () => {
-        _app.currentProject().deleteItem(item.id);
+        _app.getProjectByID(_app.currentProject().id).deleteItem(item.id);
+        _renderTodoItems();
       });
       listItem.appendChild(todoItemView);
       itemList.appendChild(listItem);
