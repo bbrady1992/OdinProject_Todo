@@ -1,0 +1,3 @@
+const LocalStorageInterface = (() => {})();
+
+export { LocalStorageInterface };

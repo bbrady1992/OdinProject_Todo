@@ -12,10 +12,6 @@ const ProjectView = (() => {
     SetTextForElement(title, project.title);
     container.appendChild(title);
 
-    const addTodoButton = document.createElement("button");
-    SetTextForElement(addTodoButton, "Add Item");
-    container.appendChild(addTodoButton);
-
     const itemHeader = document.createElement("h2");
     SetTextForElement(itemHeader, "To-do Items");
     container.appendChild(itemHeader);
@@ -72,4 +68,4 @@ const ProjectView = (() => {
   return { renderProject };
 })();
 
-export { ProjectView as ProjectView2 };
+export { ProjectView };
