@@ -2,6 +2,11 @@ import { SetTextForElement } from "./utils";
 import { format } from "date-fns";
 
 const AddItemDialog = (addItemCallback, renderItemsCallback) => {
+  const resetToDefaults = (dueDateInput, priorityInput) => {
+    dueDateInput.value = format(new Date(), "yyyy-MM-dd");
+    priority.value = 3;
+  };
+
   const container = document.createElement("div");
   container.className = "addItemDialogContainer";
 
@@ -93,6 +98,7 @@ const AddItemDialog = (addItemCallback, renderItemsCallback) => {
     );
     renderItemsCallback();
     form.reset();
+    resetToDefaults(dueDate, priority);
   };
   form.appendChild(submitButton);
 
