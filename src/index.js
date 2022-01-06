@@ -1,4 +1,4 @@
-import { ProjectView } from "./views/projectView";
+import { ProjectView2 } from "./views/projectView";
 import { ProjectList } from "./views/projectList";
 import TodoApp from "./models/todo-app";
 import { TodoItem } from "./models/todo-item";
@@ -16,4 +16,5 @@ const item3 = TodoItem("Title3", "Desc3", new Date(2022, 1, 9), 4);
 app.getProjectByID(1).addItem(item3);
 
 ProjectList(app);
-ProjectView(app);
+
+ProjectView2.renderProject(app.getProjectByID(0));

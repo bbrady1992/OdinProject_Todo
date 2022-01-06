@@ -1,3 +1,4 @@
+import { ProjectView2 } from "./projectView";
 import { SetTextForElement } from "./utils";
 
 const ProjectList = (app) => {
@@ -26,6 +27,7 @@ const ProjectList = (app) => {
       SetTextForElement(listItem, value.title);
       listItem.addEventListener("click", () => {
         app.setCurrentProject(key);
+        ProjectView2.renderProject(_app.getProjectByID(key));
       });
       list.appendChild(listItem);
     });

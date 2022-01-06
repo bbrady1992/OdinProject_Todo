@@ -4,60 +4,72 @@ import { SetTextForElement } from "./utils";
 import { TodoItem } from "../models/todo-item";
 import { parseISO } from "date-fns";
 
-const ProjectView = (app) => {
-  const _app = app;
-  const container = document.createElement("div");
+const ProjectView = (() => {
+  const renderProject = (project) => {
+    const container = document.createElement("div");
 
-  const title = document.createElement("h1");
-  SetTextForElement(title, _app.currentProject().title);
-  container.appendChild(title);
+    const title = document.createElement("h1");
+    SetTextForElement(title, project.title);
+    container.appendChild(title);
 
-  const addTodoButton = document.createElement("button");
-  SetTextForElement(addTodoButton, "Add Item");
-  container.appendChild(addTodoButton);
+    const addTodoButton = document.createElement("button");
+    SetTextForElement(addTodoButton, "Add Item");
+    container.appendChild(addTodoButton);
 
-  const itemHeader = document.createElement("h2");
-  SetTextForElement(itemHeader, "To-do Items");
-  container.appendChild(itemHeader);
+    const itemHeader = document.createElement("h2");
+    SetTextForElement(itemHeader, "To-do Items");
+    container.appendChild(itemHeader);
 
-  const itemList = document.createElement("ul");
-  container.appendChild(itemList);
+    const itemList = document.createElement("ul");
+    container.appendChild(itemList);
 
-  const _renderTodoItems = () => {
-    while (itemList.firstChild) {
-      itemList.removeChild(itemList.firstChild);
+    const _renderTodoItems = () => {
+      while (itemList.firstChild) {
+        itemList.removeChild(itemList.firstChild);
+      }
+      project.items.forEach((item) => {
+        const listItem = document.createElement("li");
+        const todoItemView = TodoItemView(
+          item,
+          (isComplete) => {
+            item.completed = isComplete;
+            console.log(`Item ${item.id} checkbox clicked`);
+            console.log({ item });
+          },
+          () => {
+            project.deleteItem(item.id);
+            _renderTodoItems();
+          }
+        );
+        listItem.appendChild(todoItemView);
+        itemList.appendChild(listItem);
+      });
+    };
+
+    _renderTodoItems();
+
+    const projectView = document.querySelector("#projectView");
+    // Clear existing project view if it exists
+    while (projectView.firstChild) {
+      projectView.removeChild(projectView.firstChild);
     }
-    _app.currentProject().items.forEach((item) => {
-      const listItem = document.createElement("li");
-      const todoItemView = TodoItemView(
-        item,
-        (isComplete) => {
-          item.completed = isComplete;
-          console.log(`Item ${item.id} checkbox clicked`);
-          console.log({ item });
-        },
-        () => {
-          _app.getProjectByID(_app.currentProject().id).deleteItem(item.id);
-          _renderTodoItems();
-        }
-      );
-      listItem.appendChild(todoItemView);
-      itemList.appendChild(listItem);
-    });
+    projectView.appendChild(container);
+
+    projectView.appendChild(
+      AddItemDialog((title, description, dueDate, priority) => {
+        console.log(`Date is ${dueDate}`);
+        const newItem = TodoItem(
+          title,
+          description,
+          parseISO(dueDate),
+          priority
+        );
+        project.addItem(newItem);
+      }, _renderTodoItems)
+    );
   };
 
-  _renderTodoItems();
+  return { renderProject };
+})();
 
-  const projectView = document.querySelector("#projectView");
-  projectView.appendChild(container);
-
-  projectView.appendChild(
-    AddItemDialog((title, description, dueDate, priority) => {
-      console.log(`Date is ${dueDate}`);
-      const newItem = TodoItem(title, description, parseISO(dueDate), priority);
-      app.currentProject().addItem(newItem);
-    }, _renderTodoItems)
-  );
-};
-
-export { ProjectView };
+export { ProjectView as ProjectView2 };
