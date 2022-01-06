@@ -12,4 +12,16 @@ const TodoItem = (title, description, dueDate, priority) => {
   };
 };
 
-export { TodoItem };
+const TodoItemFromJSON = (jsonObject) => {
+  let item = TodoItem(
+    jsonObject.title,
+    jsonObject.description,
+    jsonObject.dueDate,
+    jsonObject.priority
+  );
+  item.completed = jsonObject.completed;
+  item.id = jsonObject.id;
+  return item;
+};
+
+export { TodoItem, TodoItemFromJSON };

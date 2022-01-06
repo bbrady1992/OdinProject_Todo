@@ -1,4 +1,5 @@
 import { TodoItem } from "./todo-item";
+import { LocalStorageInterface } from "../storage/localStorageInterface";
 
 const ProjectID = (function () {
   let id = 0;

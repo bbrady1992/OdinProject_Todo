@@ -3,6 +3,7 @@ import { TodoItemView } from "./todoItemView";
 import { SetTextForElement } from "./utils";
 import { TodoItem } from "../models/todo-item";
 import { parseISO } from "date-fns";
+import { LocalStorageInterface } from "../storage/localStorageInterface";
 
 const ProjectView = (() => {
   const renderProject = (project) => {
@@ -34,6 +35,7 @@ const ProjectView = (() => {
           },
           () => {
             project.deleteItem(item.id);
+            LocalStorageInterface.DeleteItem(project.id, item.id);
             _renderTodoItems();
           }
         );
