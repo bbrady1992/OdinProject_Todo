@@ -5,14 +5,6 @@ import { TodoItem } from "./models/todo-item";
 import { SetTextForElement } from "./views/utils";
 
 let app = TodoApp();
-const houseProjectID = app.createProject("House");
-const item1 = TodoItem("Title1", "Desc1", new Date(2021, 1, 4), 5);
-const item2 = TodoItem("Title2", "Desc2", new Date(2021, 2, 1), 3);
-app.getProjectByID(0).addItem(item1);
-app.getProjectByID(0).addItem(item2);
-
-const item3 = TodoItem("Title3", "Desc3", new Date(2022, 1, 9), 4);
-app.getProjectByID(1).addItem(item3);
 
 ProjectList(app);
 

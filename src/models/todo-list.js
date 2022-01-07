@@ -1,15 +1,8 @@
 import { TodoItem } from "./todo-item";
 import { LocalStorageInterface } from "../storage/localStorageInterface";
 
-const ProjectID = (function () {
-  let id = 0;
-  return function () {
-    return id++;
-  };
-})();
-
 const TodoList = (title) => {
-  let id = ProjectID();
+  let id = LocalStorageInterface.GetNextProjectID();
   let items = [];
   let _nextItemIndex = 1;
   const addItem = (todoItem) => {
@@ -18,6 +11,7 @@ const TodoList = (title) => {
     todoItem.id = _nextItemIndex;
     ++_nextItemIndex;
     items.push(todoItem);
+    LocalStorageInterface.StoreItem(id, todoItem);
   };
 
   const deleteItem = (todoItemID) => {
@@ -37,9 +31,16 @@ const TodoList = (title) => {
     id,
     title,
     items,
+    _nextItemIndex,
     addItem,
     deleteItem,
   };
 };
 
-export { TodoList };
+const TodoListFromJSON = (jsonObject) => {
+  let todoList = TodoList(jsonObject.title);
+  todoList.id = jsonObject.id;
+  todoList._nextItemIndex = jsonObject._nextItemIndex;
+};
+
+export { TodoList, TodoListFromJSON };
